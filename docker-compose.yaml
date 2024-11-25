@@ -1,7 +1,7 @@
 version: '3.8'
 services:
   golang-app:
-    image: docker.io/dipansus/gpa_w12:v3
+    image: docker.io/dipansus/gpa_w12:v5
     ports:
       - "80:80"
     environment:
