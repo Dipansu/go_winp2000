@@ -1,0 +1,32 @@
+version: '3.8'
+services:
+  golang-app:
+    image: docker.io/dipansus/gpa_w12:v3
+    ports:
+      - "80:80"
+    environment:
+      - MONGO_URL=mongodb://mongo:27017
+    depends_on:
+      - mongo
+  mongo:
+    image: docker.io/mongo:latest
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db  # Mounts a named volume for persistent data
+    restart: unless-stopped  # Ensures the container restarts automatically on failure
+volumes:
+  mongo-data:
+    driver: azure_file
+    driver_opts:
+      share_name: mongo-data
+      storage_account_name: mongodtoragegroupa0001
+      storage_account_key: <your key>
+
+
+#environment:
+      #- MONGO_INITDB_ROOT_USERNAME=admin
+      #- MONGO_INITDB_ROOT_PASSWORD=securepassword
+
+
+
